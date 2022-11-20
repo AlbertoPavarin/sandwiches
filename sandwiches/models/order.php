@@ -12,6 +12,12 @@
         protected $pickup_ID;
         protected $json;
 
+
+        //chi deve calcolare il prezzo totale del carrello?
+        /*function create($user_ID, $total_price, $break_ID, $status_ID, $pickup_ID){
+
+        }*/
+
         public function __construct($db)
         {
             $this->conn = $db;
@@ -43,5 +49,16 @@
 
             return $stmt;
         }
+
+        
+        function setStatus($id){
+
+            $query = "UPDATE $this->table_name SET status_ID = 1 WHERE ID = $id";
+
+            $stmt = $this->conn->query($query);
+
+            return $stmt;
+        }
+
     }
 ?>
