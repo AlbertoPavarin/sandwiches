@@ -34,5 +34,14 @@
 
             return $stmt;
         }
+
+        function delete($id){
+
+            $query = "UPDATE $this->table_name SET status_ID = 2 WHERE ID = $id";
+
+            $stmt = $this->conn->query($query);
+
+            return $stmt;
+        }
     }
 ?>
