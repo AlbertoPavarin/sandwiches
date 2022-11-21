@@ -38,6 +38,24 @@
             return $stmt;
         }
 
+        function getArchiveOrderStatus($id)
+        {
+            $query = "SELECT * FROM $this->table_name WHERE status_ID = $id";
+
+            $stmt = $this->conn->query($query);
+
+            return $stmt;
+        }
+
+        function getArchiveOrderBreak($id)
+        {
+            $query = "SELECT * FROM $this->table_name WHERE break_ID = $id";
+
+            $stmt = $this->conn->query($query);
+
+            return $stmt;
+        }
+
         function delete($id){
 
             $query = "UPDATE $this->table_name SET status_ID = 3 WHERE ID = $id";
@@ -66,14 +84,12 @@
             $stmt->bind_param('idiiis', $user_ID, $total_price, $break_ID, $status_ID, $pickup_ID, $json);
             if ($stmt->execute())
             {
-                return true;
+                return $stmt;
             }
             else
             {
-                return false;
+                return "";
             }
-
         }
-
     }
 ?>

@@ -35,7 +35,7 @@ if ($stmt->num_rows > 0)
         'break_ID' => $break_ID,
         'status_ID' => $status_ID,
         'pickup_ID' => $pickup_ID,
-        'json' => $json
+        'json' => json_decode($json)
        );
        array_push($order_arr['records'], $order_record);
     }
