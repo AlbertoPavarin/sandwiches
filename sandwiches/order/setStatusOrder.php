@@ -25,6 +25,6 @@ if ($stmt === TRUE)
     echo "status set on 1";
 }
 else {
-    echo "\n\nNo record";
+    echo "\n\nError";
 }
 ?>
