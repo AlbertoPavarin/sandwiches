@@ -10,7 +10,7 @@ class Break_{
         $this->conn=$db;
     }
 
-    public function getBreak($id)        
+    public function getBreak($id) // Ottiene la ricreazione che ha l'id passato alla funzione   
     {
         $query = "SELECT break_time FROM $this->table_name WHERE ID = $id";
 

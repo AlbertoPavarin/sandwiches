@@ -34,6 +34,7 @@ if ($stmt->num_rows > 0)
     }
     echo json_encode($status_arr);
     http_response_code(200);
+    return json_encode($status_arr);
 }
 else {
     echo "\n\nNo record";

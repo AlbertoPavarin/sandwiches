@@ -8,23 +8,23 @@ include_once dirname(__FILE__) . '/../models/order.php';
 $database = new Database();
 $db = $database->connect();
 
-if (!strpos($_SERVER["REQUEST_URI"], "?ID="))
+if (!strpos($_SERVER["REQUEST_URI"], "?ID=")) // Controlla se l'URI contiene ?ID
 {
     http_response_code(400);
     echo json_encode(array("Message" => "Bad request"));
 }
 
-$id = explode("?ID=" ,$_SERVER['REQUEST_URI'])[1];
+$id = explode("?ID=" ,$_SERVER['REQUEST_URI'])[1]; // Viene ricavato quello che c'è dopo ?ID
 
 $order = new Order($db);
 
 $stmt = $order->getOrder($id);
 
-if ($stmt->num_rows > 0)
+if ($stmt->num_rows > 0) // Se la funzione getOrder ha ritornato dei record
 {
     $order_arr = array();
     $order_arr['records'] = array();
-    while($record = $stmt->fetch_assoc())
+    while($record = $stmt->fetch_assoc()) // trasforma una riga in un array e lo fa per tutte le righe di un record
     {
        extract($record);
        $order_record = array(
@@ -41,6 +41,7 @@ if ($stmt->num_rows > 0)
     }
     echo json_encode($order_arr);
     http_response_code(200);
+    return json_encode($order_arr);
 }
 else {
     echo "\n\nNo record";

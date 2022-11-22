@@ -12,14 +12,14 @@ include_once dirname(__FILE__) . '/../models/orderProduct.php';
 $database = new Database();
 $db = $database->connect(); 
 
-$data = json_decode(file_get_contents("php://input"));
-if (!empty($data))
+$data = json_decode(file_get_contents("php://input")); // Legge dati dalla request body
+if (!empty($data)) // Se qualcosa viene letto
 {
     $order = new Order($db);
-    if (!empty($record = $order->setOrder($data->user_ID, $data->total_price, $data->break_ID, $data->status_ID, $data->pickup_ID, json_encode($data->json))))
+    if (!empty($record = $order->setOrder($data->user_ID, $data->total_price, $data->break_ID, $data->status_ID, $data->pickup_ID ,json_encode($data->json))))
     {
         $orderProduct = new OrderProduct($db);
-        $orderProduct->setOrderProduct($record->insert_id, json_encode($data->json->products));
+        $orderProduct->setOrderProduct($record->insert_id, json_encode($data->products));
         http_response_code(201);
         echo json_encode(array("Message"=> "Created"));
     }

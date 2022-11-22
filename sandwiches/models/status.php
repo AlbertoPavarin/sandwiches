@@ -11,7 +11,7 @@
             $this->conn=$db;
         }
 
-        public function getStatus($id)        
+        public function getStatus($id) // Ottiene lo status che ha come id quello passato alla funzione
         {
             $query = "SELECT description FROM $this->table_name WHERE ID = $id";
 

@@ -12,11 +12,11 @@ $order = new Order($db);
 
 $stmt = $order->getArchiveOrder();
 
-if ($stmt->num_rows > 0)
+if ($stmt->num_rows > 0) // Se la funzione getArchiveOrder ha ritornato dei record
 {
     $order_arr = array();
     $order_arr['records'] = array();
-    while($record = $stmt->fetch_assoc())
+    while($record = $stmt->fetch_assoc()) // trasforma una riga in un array e lo fa per tutte le righe di un record
     {
        extract($record);
        $order_record = array(
@@ -32,6 +32,7 @@ if ($stmt->num_rows > 0)
        array_push($order_arr['records'], $order_record);
     }
     echo json_encode($order_arr);
+    return json_encode($order_arr);
 }
 else {
     echo "\n\nNo record";
