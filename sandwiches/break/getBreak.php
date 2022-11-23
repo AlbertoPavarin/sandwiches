@@ -34,7 +34,7 @@ if ($stmt->num_rows > 0) // Se la funzione getBreak ha ritornato dei record
     }
     echo json_encode($break_arr);
     http_response_code(200);
-    return json_encode($break_arr);
+    return json_encode($break_arr, JSON_PRETTY_PRINT);
 }
 else {
     echo "\n\nNo record";

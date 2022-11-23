@@ -8,11 +8,19 @@ include_once dirname(__FILE__) . '/../models/order.php';
 $database = new Database();
 $db = $database->connect();
 
+if (!strpos($_SERVER["REQUEST_URI"], "?USER_ID=")) // Controlla se l'URI contiene ?USER_ID
+{
+    http_response_code(400);
+    die(json_encode(array("Message" => "Bad request")));
+}
+
+$id = explode("?USER_ID=" ,$_SERVER['REQUEST_URI'])[1]; // Viene ricavato quello che c'è dopo ?USER_ID
+
 $order = new Order($db);
 
-$stmt = $order->getArchiveOrder();
+$stmt = $order->getArchiveOrderUser($id);
 
-if ($stmt->num_rows > 0) // Se la funzione getArchiveOrder ha ritornato dei record
+if ($stmt->num_rows > 0) // Se la funzione getArchiveOrderBreak ha ritornato dei record
 {
     $order_arr = array();
     $order_arr['records'] = array();
@@ -32,6 +40,7 @@ if ($stmt->num_rows > 0) // Se la funzione getArchiveOrder ha ritornato dei reco
        array_push($order_arr['records'], $order_record);
     }
     echo json_encode($order_arr, JSON_PRETTY_PRINT);
+    http_response_code(200);
     return json_encode($order_arr);
 }
 else {

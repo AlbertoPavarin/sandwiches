@@ -32,7 +32,7 @@ if ($stmt->num_rows > 0)
        );
        array_push($status_arr['records'], $status_record);
     }
-    echo json_encode($status_arr);
+    echo json_encode($status_arr, JSON_PRETTY_PRINT);
     http_response_code(200);
     return json_encode($status_arr);
 }

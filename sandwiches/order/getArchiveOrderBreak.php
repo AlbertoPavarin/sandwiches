@@ -39,7 +39,7 @@ if ($stmt->num_rows > 0) // Se la funzione getArchiveOrderBreak ha ritornato dei
        );
        array_push($order_arr['records'], $order_record);
     }
-    echo json_encode($order_arr);
+    echo json_encode($order_arr, JSON_PRETTY_PRINT);
     http_response_code(200);
     return json_encode($order_arr);
 }
